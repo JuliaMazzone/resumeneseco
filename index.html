@@ -4,78 +4,279 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ydiart Mazzone · Resúmenes de Economía</title>
-  <meta name="description" content="Catálogo de resúmenes por año y materia. Enlaces a Google Drive y botón de Cafecito." />
+  <meta name="description" content="Resúmenes por año y materia. Enlaces a Google Drive. Invitános un cafecito en cafecito.app/resumeneseco" />
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Ydiart Mazzone · Resúmenes de Economía" />
+  <meta property="og:description" content="Resúmenes por año y materia con acceso directo a Google Drive." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/banner.png" />
+  <meta property="og:image:alt" content="Banner Ydiart Mazzone Resúmenes Economía" />
+  <link rel="icon" href="assets/profile.png" type="image/png" />
   <style>
-    body {margin:0;font-family: Arial, sans-serif;background:#f8f5ef;color:#2a231e;}
-    header {background:#7b4b27;color:#fff;padding:1rem;text-align:center;}
-    header h1 {margin:0;font-size:1.5rem;}
-    header p {margin:.3rem 0 0;}
-    .container {max-width:1000px;margin:2rem auto;padding:0 1rem;}
-    .card {background:#fff;border-radius:12px;padding:1rem;margin:1rem 0;box-shadow:0 4px 12px rgba(0,0,0,.08);}
-    .card h3 {margin:0 0 .5rem;}
-    .card p {color:#555;}
-    .btn {display:inline-block;margin-top:.5rem;padding:.6rem 1rem;background:#7b4b27;color:#fff;text-decoration:none;border-radius:8px;}
-    .btn:hover {background:#5c3a1e;}
-    footer {text-align:center;padding:1.5rem;font-size:.9rem;color:#7a6e65;background:#fff;border-top:1px solid #eee;}
+    :root{
+      --bg:#f8f5ef;
+      --card:#ffffff;
+      --ink:#2a231e;
+      --muted:#766d65;
+      --brand:#7b4b27;     /* café */
+      --accent:#c49b6a;    /* latte */
+      --ring: rgba(123,75,39,.25);
+      --shadow: 0 10px 30px rgba(0,0,0,.06);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family: Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg)}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+    header{
+      position:sticky; top:0; z-index:50;
+      background:linear-gradient(180deg,#fff,#fff6ee);
+      border-bottom:1px solid #efeadf;
+      box-shadow:0 6px 16px rgba(0,0,0,.04);
+    }
+    .nav{display:flex;align-items:center;gap:14px;justify-content:space-between;padding:12px 0}
+    .brand{display:flex;align-items:center;gap:12px}
+    .avatar{
+      width:44px;height:44px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);border:1px solid #eadfcd;background:#fff;
+    }
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+    .title{margin:0;font-weight:800;font-size:clamp(18px,2.4vw,22px)}
+    .subtitle{margin:0;color:var(--muted);font-size:13px}
+    .navlinks{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+    .navlinks a{padding:8px 12px;border-radius:10px;border:1px solid #eadfcd;background:#fff}
+    .hero{
+      margin:22px 0; display:grid; grid-template-columns: 1.2fr .8fr; gap:16px;
+    }
+    @media (max-width: 900px){ .hero{grid-template-columns: 1fr} }
+    .panel{
+      background:var(--card); border:1px solid #eee5d6; border-radius: calc(var(--radius) + 4px);
+      padding:22px; box-shadow: var(--shadow);
+    }
+    .banner{
+      width:100%; border-radius:16px; overflow:hidden; border:1px solid #eee5d6;
+      background:#fff; display:block;
+    }
+    .banner img{width:100%;height:auto;display:block}
+    h1{margin:.2rem 0 0; font-size:clamp(26px,4vw,34px)}
+    .lead{color:var(--muted);margin-top:8px;margin-bottom:0}
+    .btn{
+      display:inline-flex; align-items:center; gap:10px; font-weight:800;
+      padding:12px 14px; border-radius:12px; transition:.2s ease;
+      background: var(--brand); color:#fff; box-shadow: var(--shadow); border:0;
+    }
+    .btn:hover{filter:brightness(.95); text-decoration:none}
+    .btn.alt{background:#fff;color:var(--brand);border:1px solid #eadfcd}
+    .tools{display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin:16px 0}
+    .input, .select{
+      background:#fff; border:1px solid #eadfcd; border-radius:12px; padding:12px 14px;
+      box-shadow: var(--shadow); outline-color: var(--ring); min-width: 220px;
+    }
+    .panel h2{margin:0 0 10px;font-size:clamp(20px,3vw,24px)}
+    .grid{display:grid; gap:16px}
+    .year{background:transparent;border:none;padding:0;margin:0}
+    .year h3{
+      font-size:clamp(18px,2.8vw,22px); margin:18px 0 10px; display:flex; align-items:center; gap:10px;
+    }
+    .cards{display:grid; gap:14px; grid-template-columns: repeat( auto-fill, minmax(240px,1fr));}
+    .card{
+      background:var(--card); border:1px solid #eee5d6; border-radius:var(--radius);
+      padding:16px; box-shadow: var(--shadow); display:flex; flex-direction:column; gap:10px;
+      min-height: 168px;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700;
+      padding:6px 10px; border-radius:999px; background:#fff6e8; color:#5c3a1e; border:1px solid #f0e1ca;
+    }
+    .badge.gray{background:#f2f2f2; color:#666; border-color:#e6e6e6}
+    .pill{display:inline-block;border:1px solid #eadfcd;background:#fff;border-radius:999px;padding:6px 10px;font-size:12px}
+    .card h4{margin:0;font-size:17px}
+    .desc{color:var(--muted); font-size:14px; line-height:1.45; margin:0}
+    .actions{margin-top:auto; display:flex; gap:8px; flex-wrap:wrap}
+    .a{
+      text-decoration:none; font-weight:700; padding:10px 12px; border-radius:10px; 
+      border:1px solid #eadfcd; color:var(--brand); background:#fff;
+    }
+    .a.primary{background:var(--brand); color:#fff; border-color:var(--brand)}
+    .empty{padding:22px; text-align:center; color:var(--muted); border:1px dashed #e8dcc7; border-radius:12px}
+    .foot{margin:28px 0 18px; text-align:center; color:var(--muted); font-size:13px}
   </style>
 </head>
 <body>
   <header>
-    <h1>📚 Ydiart Mazzone — Resúmenes de Economía</h1>
-    <p>Facuamigas y futuras economistas compartiendo apuntes ✨</p>
-    <div style="margin-top:12px">
-      <a href='https://cafecito.app/resumeneseco' rel='noopener' target='_blank'>
-        <img srcset='https://cdn.cafecito.app/imgs/buttons/button_1.png 1x,
-                     https://cdn.cafecito.app/imgs/buttons/button_1_2x.png 2x,
-                     https://cdn.cafecito.app/imgs/buttons/button_1_3.75x.png 3.75x'
-             src='https://cdn.cafecito.app/imgs/buttons/button_1.png'
-             alt='Invitame un café en cafecito.app' />
-      </a>
+    <div class="wrap nav">
+      <div class="brand">
+        <div class="avatar" aria-hidden="true">
+          <img src="assets/profile.png" alt="Logo Ydiart Mazzone" />
+        </div>
+        <div>
+          <div class="title">Ydiart Mazzone</div>
+          <div class="subtitle">Resúmenes de Economía</div>
+        </div>
+      </div>
+      <nav class="navlinks">
+        <a href="#info">Información</a>
+        <a href="#catalogo">Resúmenes</a>
+        <a href="https://cafecito.app/resumeneseco" target="_blank" rel="noopener">☕ Cafecito</a>
+      </nav>
     </div>
   </header>
 
-  <div class="container">
-    <h2>Información general</h2>
-    <p>En esta página encontrarás nuestros resúmenes organizados por año y materia, con enlaces directos a Google Drive.
-    Si te salvamos las papas con alguna materia, ¡podés agradecérnoslo invitándonos un cafecito! ☕</p>
+  <main class="wrap">
+    <section id="info" class="hero">
+      <div class="panel">
+        <h1>Resúmenes claros y listos para rendir</h1>
+        <p class="lead">
+          Somos Martina y Julia, facuamigas y futuras economistas. En esta página vas a encontrar nuestros resúmenes 
+          organizados por año y materia, con enlaces directos a Google Drive.
+        </p>
+        <p class="lead" style="margin-top:10px">
+          Si te salvamos las papas con alguna materia, <strong>¡podés invitarnos un cafecito!</strong>
+        </p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+          <a class="btn" href="https://cafecito.app/resumeneseco" target="_blank" rel="noopener">Invitarnos un Cafecito ☕</a>
+          <a class="btn alt" href="#catalogo">Ver resúmenes</a>
+        </div>
+        <p class="subtitle" style="margin-top:14px">Tip: asegurate de que los archivos de Drive estén compartidos como “Cualquier persona con el enlace”.</p>
+        <div style="margin-top:12px">
+          <a href="https://cafecito.app/resumeneseco" rel="noopener" target="_blank">
+            <img srcset="https://cdn.cafecito.app/imgs/buttons/button_1.png 1x,
+                         https://cdn.cafecito.app/imgs/buttons/button_1_2x.png 2x,
+                         https://cdn.cafecito.app/imgs/buttons/button_1_3.75x.png 3.75x"
+                 src="https://cdn.cafecito.app/imgs/buttons/button_1.png"
+                 alt="Invitame un café en cafecito.app" />
+          </a>
+        </div>
+      </div>
+      <div class="panel">
+        <a class="banner" href="#catalogo" aria-label="Ir al catálogo">
+          <img src="assets/banner.png" alt="Banner Ydiart Mazzone Resúmenes de Economía" />
+        </a>
+      </div>
+    </section>
 
-    <h2>Resúmenes disponibles</h2>
+    <section id="catalogo" class="panel">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+        <h2 style="margin:0">Catálogo de resúmenes</h2>
+        <div class="tools">
+          <input class="input" id="q" type="search" placeholder="Buscar: ‘micro’, ‘macroeconomía’, ‘finanzas’…" />
+          <select class="select" id="filtroAnio">
+            <option value="">Todos los años</option>
+            <option>1° año</option>
+            <option>2° año</option>
+            <option>3° año</option>
+            <option>4° año</option>
+            <option>5° año</option>
+          </select>
+        </div>
+      </div>
 
-    <h3>1° año</h3>
-    <div class="card"><h3>Microeconomía I</h3><a class="btn" href="#">Ver en Drive</a></div>
-    <div class="card"><h3>Sistemas de Información Contable I</h3><a class="btn" href="#">Ver en Drive</a></div>
-    <div class="card"><h3>Metodología de las Ciencias</h3><a class="btn" href="#">Ver en Drive</a></div>
+      <div id="grid" class="grid" style="margin-top:12px"></div>
+      <div id="empty" class="empty" hidden>Sin resultados para la búsqueda/filtrado actual.</div>
+      <p class="foot">¿Querés aportar? <a href="https://cafecito.app/resumeneseco" target="_blank" rel="noopener">Invitarnos un cafecito</a> o compartí la web con tus compas.</p>
+    </section>
+  </main>
 
-    <h3>2° año</h3>
-    <div class="card"><h3>Macroeconomía I</h3><a class="btn" href="#">Ver en Drive</a></div>
-
-    <h3>3° año</h3>
-    <div class="card"><h3>Macroeconomía II</h3><a class="btn" href="#">Ver en Drive</a></div>
-    <div class="card"><h3>Microeconomía II</h3><a class="btn" href="#">Ver en Drive</a></div>
-
-    <h3>4° año</h3>
-    <div class="card"><h3>Metodología de la Economía</h3><a class="btn" href="#">Ver en Drive</a></div>
-    <div class="card"><h3>Historia de las Doctrinas Económicas</h3><a class="btn" href="#">Ver en Drive</a></div>
-    <div class="card"><h3>Teorías del Crecimiento y del Desarrollo Económico</h3><a class="btn" href="#">Ver en Drive</a></div>
-    <div class="card"><h3>Macroeconomía III</h3><a class="btn" href="#">Ver en Drive</a></div>
-    <div class="card"><h3>Microeconomía III</h3><a class="btn" href="#">Ver en Drive</a></div>
-
-    <h3>5° año</h3>
-    <div class="card"><h3>Economía Internacional</h3><a class="btn" href="#">Ver en Drive</a></div>
-    <div class="card"><h3>Análisis de Inversiones y Finanzas</h3><a class="btn" href="#">Ver en Drive</a></div>
-    <div class="card"><h3>Política Económica</h3><p>Próximamente</p></div>
-    <div class="card"><h3>Emprendimientos Tecnológicos</h3><p>Próximamente</p></div>
-  </div>
-
-  <footer>
-    <p>Hecho con 💻 por Martina y Julia.<br/>
-    <a href='https://cafecito.app/resumeneseco' rel='noopener' target='_blank'>
-      <img srcset='https://cdn.cafecito.app/imgs/buttons/button_1.png 1x,
-                   https://cdn.cafecito.app/imgs/buttons/button_1_2x.png 2x,
-                   https://cdn.cafecito.app/imgs/buttons/button_1_3.75x.png 3.75x'
-           src='https://cdn.cafecito.app/imgs/buttons/button_1.png'
-           alt='Invitame un café en cafecito.app' />
-    </a></p>
+  <footer class="wrap" style="margin:22px 0 30px">
+    <div class="panel" style="text-align:center">
+      <p style="margin:0 0 10px">Hecho con 💻 por Martina y Julia.</p>
+      <a href="https://cafecito.app/resumeneseco" rel="noopener" target="_blank">
+        <img srcset="https://cdn.cafecito.app/imgs/buttons/button_1.png 1x,
+                     https://cdn.cafecito.app/imgs/buttons/button_1_2x.png 2x,
+                     https://cdn.cafecito.app/imgs/buttons/button_1_3.75x.png 3.75x"
+             src="https://cdn.cafecito.app/imgs/buttons/button_1.png"
+             alt="Invitame un café en cafecito.app" />
+      </a>
+    </div>
   </footer>
+
+  <script>
+    // ### DATA: editá los links de Drive aquí ###
+    // Campos: anio, materia, estado ("disponible" | "proximamente"), link (si disponible), nota opcional
+    const RESUMENES = [
+      // 1° año
+      { anio:"1° año", materia:"Microeconomía I", estado:"disponible", link:"#", nota:"" },
+      { anio:"1° año", materia:"Sistemas de Información Contable I", estado:"disponible", link:"#", nota:"" },
+      { anio:"1° año", materia:"Metodología de las Ciencias", estado:"disponible", link:"#", nota:"" },
+
+      // 2° año
+      { anio:"2° año", materia:"Macroeconomía I", estado:"disponible", link:"#", nota:"" },
+
+      // 3° año
+      { anio:"3° año", materia:"Macroeconomía II", estado:"disponible", link:"#", nota:"" },
+      { anio:"3° año", materia:"Microeconomía II", estado:"disponible", link:"#", nota:"" },
+
+      // 4° año
+      { anio:"4° año", materia:"Metodología de la Economía", estado:"disponible", link:"#", nota:"" },
+      { anio:"4° año", materia:"Historia de las Doctrinas Económicas", estado:"disponible", link:"#", nota:"" },
+      { anio:"4° año", materia:"Teorías del Crecimiento y del Desarrollo Económico", estado:"disponible", link:"#", nota:"" },
+      { anio:"4° año", materia:"Macroeconomía III", estado:"disponible", link:"#", nota:"" },
+      { anio:"4° año", materia:"Microeconomía III", estado:"disponible", link:"#", nota:"" },
+
+      // 5° año
+      { anio:"5° año", materia:"Economía Internacional", estado:"disponible", link:"#", nota:"" },
+      { anio:"5° año", materia:"Análisis de Inversiones y Finanzas", estado:"disponible", link:"#", nota:"" },
+      { anio:"5° año", materia:"Política Económica", estado:"proximamente", link:"", nota:"Próximamente" },
+      { anio:"5° año", materia:"Emprendimientos Tecnológicos", estado:"proximamente", link:"", nota:"Próximamente" },
+    ];
+
+    const grid = document.getElementById('grid');
+    const empty = document.getElementById('empty');
+    const q = document.getElementById('q');
+    const filtroAnio = document.getElementById('filtroAnio');
+
+    function normalize(s){ return (s||"").toString().toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,""); }
+
+    function cardHTML(item){
+      const badge = item.estado === "proximamente"
+        ? '<span class="badge gray">Próximamente</span>'
+        : '<span class="badge">Disponible</span>';
+      const linkBtn = item.estado === "disponible"
+        ? `<a class="a primary" href="${item.link || '#'}" target="_blank" rel="noopener">Ver en Drive</a>`
+        : `<span class="a" style="pointer-events:none;opacity:.6">En preparación</span>`;
+      return `
+        <article class="card">
+          <div class="meta">${badge} <span class="pill">${item.anio}</span></div>
+          <h4>${item.materia}</h4>
+          ${item.nota ? `<p class="desc">${item.nota}</p>` : `<p class="desc">Apunte actualizado y listo para estudiar.</p>`}
+          <div class="actions">${linkBtn}<a class="a" href="https://cafecito.app/resumeneseco" target="_blank" rel="noopener">Invitar ☕</a></div>
+        </article>
+      `;
+    }
+
+    function render(list){
+      if(!list.length){ grid.innerHTML = ""; empty.hidden = false; return; }
+      empty.hidden = true;
+
+      const ordenAnios = ["1° año","2° año","3° año","4° año","5° año"];
+      const grupos = Object.fromEntries(ordenAnios.map(a=>[a,[]]));
+      list.forEach(it => { (grupos[it.anio] ||= []).push(it); });
+
+      const frag = [];
+      ordenAnios.forEach(anio=>{
+        const items = (grupos[anio]||[]);
+        if(!items.length) return;
+        frag.push(`<section class="year"><h3>${anio}</h3><div class="cards">`);
+        items.forEach(it=> frag.push(cardHTML(it)));
+        frag.push(`</div></section>`);
+      });
+      grid.innerHTML = frag.join("");
+    }
+
+    function applyFilters(){
+      const term = normalize(q.value);
+      const anio = filtroAnio.value;
+      const res = RESUMENES.filter(it=>{
+        const hayTexto = !term || [it.materia, it.anio].some(x=>normalize(x).includes(term));
+        const hayAnio = !anio || it.anio === anio;
+        return hayTexto && hayAnio;
+      });
+      render(res);
+    }
+
+    q.addEventListener('input', applyFilters);
+    filtroAnio.addEventListener('change', applyFilters);
+    render(RESUMENES);
+  </script>
 </body>
 </html>
