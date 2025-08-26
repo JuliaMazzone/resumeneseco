@@ -4,47 +4,42 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ydiart Mazzone · Resúmenes de Economía</title>
-  <meta name="description" content="Resúmenes por año y materia. Enlaces a Google Drive. Invitános un cafecito en cafecito.app/resumeneseco" />
-  <!-- Open Graph / Social -->
-  <meta property="og:title" content="Ydiart Mazzone · Resúmenes de Economía" />
-  <meta property="og:description" content="Resúmenes por año y materia con acceso directo a Google Drive." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/banner.png" />
-  <meta property="og:image:alt" content="Banner Ydiart Mazzone Resúmenes Economía" />
-  <link rel="icon" href="assets/profile.png" type="image/png" />
+  <meta name="description" content="Catálogo de resúmenes por año y materia. Enlaces a Google Drive y botón de Cafecito." />
   <style>
     :root{
-      --bg:#f8f5ef;
+      --bg:#fbf8f4;
       --card:#ffffff;
       --ink:#2a231e;
-      --muted:#766d65;
-      --brand:#7b4b27;     /* café */
-      --accent:#c49b6a;    /* latte */
-      --ring: rgba(123,75,39,.25);
+      --muted:#6f665f;
+      --brand:#8b5a3c;      /* café */
+      --accent:#e7c9a9;     /* latte pastel */
+      --accent-2:#f5e6d6;   /* crema */
+      --pill:#ffe9d6;
+      --ring: rgba(139,90,60,.25);
       --shadow: 0 10px 30px rgba(0,0,0,.06);
       --radius: 18px;
     }
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{margin:0;font-family: Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg)}
     a{color:var(--brand);text-decoration:none}
     a:hover{text-decoration:underline}
     .wrap{max-width:1100px;margin:0 auto;padding:0 16px}
     header{
       position:sticky; top:0; z-index:50;
-      background:linear-gradient(180deg,#fff,#fff6ee);
-      border-bottom:1px solid #efeadf;
+      background:linear-gradient(180deg,#fff, var(--accent-2));
+      border-bottom:1px solid #efe6db;
       box-shadow:0 6px 16px rgba(0,0,0,.04);
     }
     .nav{display:flex;align-items:center;gap:14px;justify-content:space-between;padding:12px 0}
     .brand{display:flex;align-items:center;gap:12px}
-    .avatar{
-      width:44px;height:44px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);border:1px solid #eadfcd;background:#fff;
-    }
+    .avatar{width:42px;height:42px;border-radius:12px;overflow:hidden;border:1px solid #eadfcd;box-shadow:var(--shadow);background:#fff}
     .avatar img{width:100%;height:100%;object-fit:cover;display:block}
     .title{margin:0;font-weight:800;font-size:clamp(18px,2.4vw,22px)}
-    .subtitle{margin:0;color:var(--muted);font-size:13px}
-    .navlinks{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+    .muted{color:var(--muted)}
+    .navlinks{display:flex;gap:12px;flex-wrap:wrap}
     .navlinks a{padding:8px 12px;border-radius:10px;border:1px solid #eadfcd;background:#fff}
+
     .hero{
       margin:22px 0; display:grid; grid-template-columns: 1.2fr .8fr; gap:16px;
     }
@@ -53,11 +48,6 @@
       background:var(--card); border:1px solid #eee5d6; border-radius: calc(var(--radius) + 4px);
       padding:22px; box-shadow: var(--shadow);
     }
-    .banner{
-      width:100%; border-radius:16px; overflow:hidden; border:1px solid #eee5d6;
-      background:#fff; display:block;
-    }
-    .banner img{width:100%;height:auto;display:block}
     h1{margin:.2rem 0 0; font-size:clamp(26px,4vw,34px)}
     .lead{color:var(--muted);margin-top:8px;margin-bottom:0}
     .btn{
@@ -67,16 +57,11 @@
     }
     .btn:hover{filter:brightness(.95); text-decoration:none}
     .btn.alt{background:#fff;color:var(--brand);border:1px solid #eadfcd}
-    .tools{display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin:16px 0}
-    .input, .select{
-      background:#fff; border:1px solid #eadfcd; border-radius:12px; padding:12px 14px;
-      box-shadow: var(--shadow); outline-color: var(--ring); min-width: 220px;
-    }
-    .panel h2{margin:0 0 10px;font-size:clamp(20px,3vw,24px)}
+
     .grid{display:grid; gap:16px}
     .year{background:transparent;border:none;padding:0;margin:0}
-    .year h3{
-      font-size:clamp(18px,2.8vw,22px); margin:18px 0 10px; display:flex; align-items:center; gap:10px;
+    .year h2{
+      font-size:clamp(20px,3vw,24px); margin:18px 0 10px; display:flex; align-items:center; gap:10px;
     }
     .cards{display:grid; gap:14px; grid-template-columns: repeat( auto-fill, minmax(240px,1fr));}
     .card{
@@ -86,11 +71,10 @@
     }
     .badge{
       display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700;
-      padding:6px 10px; border-radius:999px; background:#fff6e8; color:#5c3a1e; border:1px solid #f0e1ca;
+      padding:6px 10px; border-radius:999px; background:var(--pill); color:#5c3a1e; border:1px solid #f0e1ca;
     }
-    .badge.gray{background:#f2f2f2; color:#666; border-color:#e6e6e6}
-    .pill{display:inline-block;border:1px solid #eadfcd;background:#fff;border-radius:999px;padding:6px 10px;font-size:12px}
-    .card h4{margin:0;font-size:17px}
+    .badge.gray{background:#f1f1f1; color:#666; border-color:#e6e6e6}
+    .card h3{margin:0;font-size:17px}
     .desc{color:var(--muted); font-size:14px; line-height:1.45; margin:0}
     .actions{margin-top:auto; display:flex; gap:8px; flex-wrap:wrap}
     .a{
@@ -98,8 +82,23 @@
       border:1px solid #eadfcd; color:var(--brand); background:#fff;
     }
     .a.primary{background:var(--brand); color:#fff; border-color:var(--brand)}
-    .empty{padding:22px; text-align:center; color:var(--muted); border:1px dashed #e8dcc7; border-radius:12px}
+    .tools{display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin:16px 0}
+    .input, .select{
+      background:#fff; border:1px solid #eadfcd; border-radius:12px; padding:12px 14px;
+      box-shadow: var(--shadow); outline-color: var(--ring); min-width: 220px;
+    }
     .foot{margin:28px 0 18px; text-align:center; color:var(--muted); font-size:13px}
+    .empty{padding:22px; text-align:center; color:var(--muted); border:1px dashed #e8dcc7; border-radius:12px}
+    .pill{display:inline-block;border:1px solid #eadfcd;background:#fff;border-radius:999px;padding:6px 10px;font-size:12px}
+    /* contacto */
+    .contact{margin:24px 0}
+    .field{display:flex; flex-direction:column; gap:6px}
+    .field input, .field textarea{
+      padding:12px 14px; border-radius:12px; border:1px solid #eadfcd; background:#fff; box-shadow:var(--shadow);
+      outline-color: var(--ring);
+    }
+    .row{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    @media (max-width:700px){ .row{grid-template-columns:1fr} }
   </style>
 </head>
 <body>
@@ -107,16 +106,18 @@
     <div class="wrap nav">
       <div class="brand">
         <div class="avatar" aria-hidden="true">
-          <img src="assets/profile.png" alt="Logo Ydiart Mazzone" />
+          <!-- Reemplazá el src por tu imagen si querés -->
+          <img src="assets/profile.png" alt="Foto de perfil Ydiart Mazzone" />
         </div>
         <div>
           <div class="title">Ydiart Mazzone</div>
-          <div class="subtitle">Resúmenes de Economía</div>
+          <div class="muted" style="font-size:13px">Resúmenes de Economía</div>
         </div>
       </div>
       <nav class="navlinks">
         <a href="#info">Información</a>
         <a href="#catalogo">Resúmenes</a>
+        <a href="#contacto">Contacto</a>
         <a href="https://cafecito.app/resumeneseco" target="_blank" rel="noopener">☕ Cafecito</a>
       </nav>
     </div>
@@ -137,21 +138,22 @@
           <a class="btn" href="https://cafecito.app/resumeneseco" target="_blank" rel="noopener">Invitarnos un Cafecito ☕</a>
           <a class="btn alt" href="#catalogo">Ver resúmenes</a>
         </div>
-        <p class="subtitle" style="margin-top:14px">Tip: asegurate de que los archivos de Drive estén compartidos como “Cualquier persona con el enlace”.</p>
-        <div style="margin-top:12px">
-          <a href="https://cafecito.app/resumeneseco" rel="noopener" target="_blank">
-            <img srcset="https://cdn.cafecito.app/imgs/buttons/button_1.png 1x,
-                         https://cdn.cafecito.app/imgs/buttons/button_1_2x.png 2x,
-                         https://cdn.cafecito.app/imgs/buttons/button_1_3.75x.png 3.75x"
-                 src="https://cdn.cafecito.app/imgs/buttons/button_1.png"
-                 alt="Invitame un café en cafecito.app" />
-          </a>
-        </div>
+        <p class="muted" style="margin-top:14px;font-size:13px">
+          Información general<br>
+          • Los materiales están agrupados por año y materia.<br>
+          • Los que figuran como <strong>Próximamente</strong> están en preparación.<br>
+          • Podés usar el <strong>buscador</strong> y <strong>filtro por año</strong> para encontrar rápido lo que necesitás.<br>
+          • ¿Sugerencias o pedidos? Escribinos por mail. 💌
+        </p>
       </div>
       <div class="panel">
-        <a class="banner" href="#catalogo" aria-label="Ir al catálogo">
-          <img src="assets/banner.png" alt="Banner Ydiart Mazzone Resúmenes de Economía" />
-        </a>
+        <h2 style="margin:0 0 8px">Información general</h2>
+        <ul style="margin:0;padding-left:18px;line-height:1.7">
+          <li>Los materiales están agrupados por <strong>año</strong> y <strong>materia</strong>.</li>
+          <li>Los que figuran como <span class="pill">Próximamente</span> están en preparación.</li>
+          <li>Podés usar el <strong>buscador</strong> y <strong>filtro por año</strong> para encontrar rápido lo que necesitás.</li>
+          <li>¿Sugerencias o pedidos? Escribinos por mail. 💌</li>
+        </ul>
       </div>
     </section>
 
@@ -175,20 +177,31 @@
       <div id="empty" class="empty" hidden>Sin resultados para la búsqueda/filtrado actual.</div>
       <p class="foot">¿Querés aportar? <a href="https://cafecito.app/resumeneseco" target="_blank" rel="noopener">Invitarnos un cafecito</a> o compartí la web con tus compas.</p>
     </section>
-  </main>
 
-  <footer class="wrap" style="margin:22px 0 30px">
-    <div class="panel" style="text-align:center">
-      <p style="margin:0 0 10px">Hecho con 💻 por Martina y Julia.</p>
-      <a href="https://cafecito.app/resumeneseco" rel="noopener" target="_blank">
-        <img srcset="https://cdn.cafecito.app/imgs/buttons/button_1.png 1x,
-                     https://cdn.cafecito.app/imgs/buttons/button_1_2x.png 2x,
-                     https://cdn.cafecito.app/imgs/buttons/button_1_3.75x.png 3.75x"
-             src="https://cdn.cafecito.app/imgs/buttons/button_1.png"
-             alt="Invitame un café en cafecito.app" />
-      </a>
-    </div>
-  </footer>
+    <!-- Contacto -->
+    <section id="contacto" class="panel contact">
+      <h2 style="margin-top:0">Contacto</h2>
+      <p class="muted" style="margin-top:0">Completá el formulario y se abrirá tu correo para enviarnos el mensaje a <strong>ydiartmazzone.eco.resumenes@gmail.com</strong>.</p>
+      <form onsubmit="enviarMail(event)">
+        <div class="row">
+          <div class="field">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="nombre" type="text" placeholder="Tu nombre" required />
+          </div>
+          <div class="field">
+            <label for="email">Tu email</label>
+            <input id="email" name="email" type="email" placeholder="tu@mail.com" required />
+          </div>
+        </div>
+        <div class="field" style="margin-top:12px">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" rows="5" placeholder="Contanos qué necesitás…" required></textarea>
+        </div>
+        <button class="btn" type="submit" style="margin-top:12px">Enviar mensaje</button>
+        <a class="btn alt" style="margin-top:12px" href="mailto:ydiartmazzone.eco.resumenes@gmail.com">Abrir mail directamente</a>
+      </form>
+    </section>
+  </main>
 
   <script>
     // ### DATA: editá los links de Drive aquí ###
@@ -225,21 +238,27 @@
     const q = document.getElementById('q');
     const filtroAnio = document.getElementById('filtroAnio');
 
-    function normalize(s){ return (s||"").toString().toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,""); }
+    function normalize(s){ return (s||"").toString().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,""); }
 
     function cardHTML(item){
       const badge = item.estado === "proximamente"
         ? '<span class="badge gray">Próximamente</span>'
         : '<span class="badge">Disponible</span>';
+      const linkDrive = (item.estado === "disponible")
+        ? (item.link && item.link !== "#" ? item.link : "#")
+        : "";
       const linkBtn = item.estado === "disponible"
-        ? `<a class="a primary" href="${item.link || '#'}" target="_blank" rel="noopener">Ver en Drive</a>`
+        ? `<a class="a primary" href="${linkDrive}" target="_blank" rel="noopener">Ver en Drive</a>`
         : `<span class="a" style="pointer-events:none;opacity:.6">En preparación</span>`;
       return `
         <article class="card">
           <div class="meta">${badge} <span class="pill">${item.anio}</span></div>
-          <h4>${item.materia}</h4>
-          ${item.nota ? `<p class="desc">${item.nota}</p>` : `<p class="desc">Apunte actualizado y listo para estudiar.</p>`}
-          <div class="actions">${linkBtn}<a class="a" href="https://cafecito.app/resumeneseco" target="_blank" rel="noopener">Invitar ☕</a></div>
+          <h3>${item.materia}</h3>
+          <p class="desc">${item.nota ? item.nota : 'Apunte actualizado y listo para estudiar.'}</p>
+          <div class="actions">
+            ${linkBtn}
+            <a class="a" href="https://cafecito.app/resumeneseco" target="_blank" rel="noopener">Invitar ☕</a>
+          </div>
         </article>
       `;
     }
@@ -248,15 +267,16 @@
       if(!list.length){ grid.innerHTML = ""; empty.hidden = false; return; }
       empty.hidden = true;
 
+      // Agrupar por año en orden
       const ordenAnios = ["1° año","2° año","3° año","4° año","5° año"];
-      const grupos = Object.fromEntries(ordenAnios.map(a=>[a,[]]));
+      const grupos = {}; ordenAnios.forEach(a=>grupos[a]=[]);
       list.forEach(it => { (grupos[it.anio] ||= []).push(it); });
 
       const frag = [];
       ordenAnios.forEach(anio=>{
         const items = (grupos[anio]||[]);
         if(!items.length) return;
-        frag.push(`<section class="year"><h3>${anio}</h3><div class="cards">`);
+        frag.push(`<section class="year"><h2>${anio}</h2><div class="cards">`);
         items.forEach(it=> frag.push(cardHTML(it)));
         frag.push(`</div></section>`);
       });
@@ -274,9 +294,22 @@
       render(res);
     }
 
+    // Contacto por mailto (estático, sin backend)
+    function enviarMail(e){
+      e.preventDefault();
+      const nombre = document.getElementById('nombre').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const mensaje = document.getElementById('mensaje').value.trim();
+      const to = 'ydiartmazzone.eco.resumenes@gmail.com';
+      const subject = encodeURIComponent('Contacto desde la web');
+      const body = encodeURIComponent(`Nombre: ${nombre}\nEmail: ${email}\n\n${mensaje}`);
+      window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+    }
+
     q.addEventListener('input', applyFilters);
     filtroAnio.addEventListener('change', applyFilters);
     render(RESUMENES);
   </script>
 </body>
 </html>
+
