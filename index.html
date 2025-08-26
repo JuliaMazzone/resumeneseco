@@ -137,15 +137,7 @@
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
           <a class="btn" href="https://cafecito.app/resumeneseco" target="_blank" rel="noopener">Invitarnos un Cafecito ☕</a>
           <a class="btn alt" href="#catalogo">Ver resúmenes</a>
-        </div>
-        <p class="muted" style="margin-top:14px;font-size:13px">
-          Información general<br>
-          • Los materiales están agrupados por año y materia.<br>
-          • Los que figuran como <strong>Próximamente</strong> están en preparación.<br>
-          • Podés usar el <strong>buscador</strong> y <strong>filtro por año</strong> para encontrar rápido lo que necesitás.<br>
-          • ¿Sugerencias o pedidos? Escribinos por mail. 💌
-        </p>
-      </div>
+  
       <div class="panel">
         <h2 style="margin:0 0 8px">Información general</h2>
         <ul style="margin:0;padding-left:18px;line-height:1.7">
@@ -178,29 +170,7 @@
       <p class="foot">¿Querés aportar? <a href="https://cafecito.app/resumeneseco" target="_blank" rel="noopener">Invitarnos un cafecito</a> o compartí la web con tus compas.</p>
     </section>
 
-    <!-- Contacto -->
-    <section id="contacto" class="panel contact">
-      <h2 style="margin-top:0">Contacto</h2>
-      <p class="muted" style="margin-top:0">Completá el formulario y se abrirá tu correo para enviarnos el mensaje a <strong>ydiartmazzone.eco.resumenes@gmail.com</strong>.</p>
-      <form onsubmit="enviarMail(event)">
-        <div class="row">
-          <div class="field">
-            <label for="nombre">Nombre</label>
-            <input id="nombre" name="nombre" type="text" placeholder="Tu nombre" required />
-          </div>
-          <div class="field">
-            <label for="email">Tu email</label>
-            <input id="email" name="email" type="email" placeholder="tu@mail.com" required />
-          </div>
-        </div>
-        <div class="field" style="margin-top:12px">
-          <label for="mensaje">Mensaje</label>
-          <textarea id="mensaje" name="mensaje" rows="5" placeholder="Contanos qué necesitás…" required></textarea>
-        </div>
-        <button class="btn" type="submit" style="margin-top:12px">Enviar mensaje</button>
-        <a class="btn alt" style="margin-top:12px" href="mailto:ydiartmazzone.eco.resumenes@gmail.com">Abrir mail directamente</a>
-      </form>
-    </section>
+   
   </main>
 
   <script>
@@ -294,17 +264,7 @@
       render(res);
     }
 
-    // Contacto por mailto (estático, sin backend)
-    function enviarMail(e){
-      e.preventDefault();
-      const nombre = document.getElementById('nombre').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const mensaje = document.getElementById('mensaje').value.trim();
-      const to = 'ydiartmazzone.eco.resumenes@gmail.com';
-      const subject = encodeURIComponent('Contacto desde la web');
-      const body = encodeURIComponent(`Nombre: ${nombre}\nEmail: ${email}\n\n${mensaje}`);
-      window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
-    }
+  
 
     q.addEventListener('input', applyFilters);
     filtroAnio.addEventListener('change', applyFilters);
