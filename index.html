@@ -6,37 +6,62 @@
   <title>Ydiart Mazzone · Resúmenes de Economía</title>
   <meta name="description" content="Catálogo de resúmenes por año y materia. Enlaces a Google Drive y botón de Cafecito." />
   <style>
+    /* Paleta pastel (mantenemos la estructura original) */
     :root{
-      --bg:#fbf8f4;
+      --morado:#B49FDC;
+      --celeste:#C5EBFE;
+      --amarillo:#FEFD97;
+      --verde:#A5F8CE;
+      --durazno:#FEC9A7;
+      --rosa:#F197CD;
+
+      --bg: var(--celeste);
       --card:#ffffff;
       --ink:#2a231e;
-      --muted:#6f665f;
-      --brand:#8b5a3c;      /* café */
-      --accent:#e7c9a9;     /* latte pastel */
-      --accent-2:#f5e6d6;   /* crema */
-      --pill:#ffe9d6;
-      --ring: rgba(139,90,60,.25);
+      --muted:#7a6e65;
+
+      /* Usamos el rosa/durazno como marca para botones y acentos */
+      --brand:#F197CD;      /* rosa */
+      --brand-2:#FEC9A7;    /* durazno */
+      --ring: rgba(241,151,205,.25);
       --shadow: 0 10px 30px rgba(0,0,0,.06);
       --radius: 18px;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;font-family: Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg)}
+    body{
+      margin:0;
+      font-family: Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+      color:var(--ink);
+      /* fondo suavemente degradado con tu paleta */
+      background:linear-gradient(180deg, var(--celeste), var(--verde));
+    }
     a{color:var(--brand);text-decoration:none}
     a:hover{text-decoration:underline}
     .wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+
     header{
       position:sticky; top:0; z-index:50;
-      background:linear-gradient(180deg,#fff, var(--accent-2));
-      border-bottom:1px solid #efe6db;
+      background:linear-gradient(180deg,#fff, var(--durazno));
+      border-bottom:1px solid #efeadf;
       box-shadow:0 6px 16px rgba(0,0,0,.04);
     }
     .nav{display:flex;align-items:center;gap:14px;justify-content:space-between;padding:12px 0}
     .brand{display:flex;align-items:center;gap:12px}
-    .avatar{width:42px;height:42px;border-radius:12px;overflow:hidden;border:1px solid #eadfcd;box-shadow:var(--shadow);background:#fff}
-    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+
+    /* Mantenemos el mismo DIV .logo pero lo convertimos en avatar con tu foto */
+    .logo{
+      width:42px;height:42px;border-radius:12px;
+      background-image:url('assets/profile.png');      /* << foto de perfil */
+      background-size:cover; background-position:center;
+      box-shadow: var(--shadow);
+      border:2px solid var(--morado);
+      position:relative;
+    }
+    /* quitamos el ícono flecha anterior para que no tape la foto */
+    .logo:after{ content:none; }
+
     .title{margin:0;font-weight:800;font-size:clamp(18px,2.4vw,22px)}
-    .muted{color:var(--muted)}
     .navlinks{display:flex;gap:12px;flex-wrap:wrap}
     .navlinks a{padding:8px 12px;border-radius:10px;border:1px solid #eadfcd;background:#fff}
 
@@ -50,13 +75,14 @@
     }
     h1{margin:.2rem 0 0; font-size:clamp(26px,4vw,34px)}
     .lead{color:var(--muted);margin-top:8px;margin-bottom:0}
+
     .btn{
       display:inline-flex; align-items:center; gap:10px; font-weight:800;
       padding:12px 14px; border-radius:12px; transition:.2s ease;
       background: var(--brand); color:#fff; box-shadow: var(--shadow); border:0;
     }
     .btn:hover{filter:brightness(.95); text-decoration:none}
-    .btn.alt{background:#fff;color:var(--brand);border:1px solid #eadfcd}
+    .btn.alt{background:#fff;color:var(--brand);border:2px solid var(--brand)}
 
     .grid{display:grid; gap:16px}
     .year{background:transparent;border:none;padding:0;margin:0}
@@ -65,50 +91,40 @@
     }
     .cards{display:grid; gap:14px; grid-template-columns: repeat( auto-fill, minmax(240px,1fr));}
     .card{
-      background:var(--card); border:1px solid #eee5d6; border-radius:var(--radius);
+      background:var(--card); border:2px solid var(--brand-2); border-radius:var(--radius);
       padding:16px; box-shadow: var(--shadow); display:flex; flex-direction:column; gap:10px;
       min-height: 168px;
     }
     .badge{
       display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700;
-      padding:6px 10px; border-radius:999px; background:var(--pill); color:#5c3a1e; border:1px solid #f0e1ca;
+      padding:6px 10px; border-radius:999px;
+      background:var(--amarillo); color:#5c3a1e; border:1px solid #f0e1ca;
     }
-    .badge.gray{background:#f1f1f1; color:#666; border-color:#e6e6e6}
+    .badge.gray{background:#f2f2f2; color:#666; border-color:#e6e6e6}
     .card h3{margin:0;font-size:17px}
     .desc{color:var(--muted); font-size:14px; line-height:1.45; margin:0}
     .actions{margin-top:auto; display:flex; gap:8px; flex-wrap:wrap}
     .a{
       text-decoration:none; font-weight:700; padding:10px 12px; border-radius:10px; 
-      border:1px solid #eadfcd; color:var(--brand); background:#fff;
+      border:2px solid var(--morado); color:#7b4b27; background:#fff;
     }
     .a.primary{background:var(--brand); color:#fff; border-color:var(--brand)}
     .tools{display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin:16px 0}
     .input, .select{
-      background:#fff; border:1px solid #eadfcd; border-radius:12px; padding:12px 14px;
-      box-shadow: var(--shadow); outline-color: var(--ring); min-width: 220px;
+      background:#fff; border:2px solid var(--morado); border-radius:12px; padding:12px 14px;
+      box-shadow: var(--shadow); outline-color: var(--morado); min-width: 220px;
     }
     .foot{margin:28px 0 18px; text-align:center; color:var(--muted); font-size:13px}
-    .empty{padding:22px; text-align:center; color:var(--muted); border:1px dashed #e8dcc7; border-radius:12px}
+    .empty{padding:22px; text-align:center; color:var(--muted); border:2px dashed var(--morado); border-radius:12px}
+    .muted{color:var(--muted)}
     .pill{display:inline-block;border:1px solid #eadfcd;background:#fff;border-radius:999px;padding:6px 10px;font-size:12px}
-    /* contacto */
-    .contact{margin:24px 0}
-    .field{display:flex; flex-direction:column; gap:6px}
-    .field input, .field textarea{
-      padding:12px 14px; border-radius:12px; border:1px solid #eadfcd; background:#fff; box-shadow:var(--shadow);
-      outline-color: var(--ring);
-    }
-    .row{display:grid; grid-template-columns:1fr 1fr; gap:12px}
-    @media (max-width:700px){ .row{grid-template-columns:1fr} }
   </style>
 </head>
 <body>
   <header>
     <div class="wrap nav">
       <div class="brand">
-        <div class="avatar" aria-hidden="true">
-          <!-- Reemplazá el src por tu imagen si querés -->
-          <img src="assets/profile.png" alt="Foto de perfil Ydiart Mazzone" />
-        </div>
+        <div class="logo" aria-hidden="true"></div>
         <div>
           <div class="title">Ydiart Mazzone</div>
           <div class="muted" style="font-size:13px">Resúmenes de Economía</div>
@@ -117,7 +133,6 @@
       <nav class="navlinks">
         <a href="#info">Información</a>
         <a href="#catalogo">Resúmenes</a>
-        <a href="#contacto">Contacto</a>
         <a href="https://cafecito.app/resumeneseco" target="_blank" rel="noopener">☕ Cafecito</a>
       </nav>
     </div>
@@ -137,7 +152,9 @@
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
           <a class="btn" href="https://cafecito.app/resumeneseco" target="_blank" rel="noopener">Invitarnos un Cafecito ☕</a>
           <a class="btn alt" href="#catalogo">Ver resúmenes</a>
-  
+        </div>
+        <p class="muted" style="margin-top:14px;font-size:13px">Tip: asegurate de que los archivos de Drive estén compartidos como “Cualquier persona con el enlace”.</p>
+      </div>
       <div class="panel">
         <h2 style="margin:0 0 8px">Información general</h2>
         <ul style="margin:0;padding-left:18px;line-height:1.7">
@@ -169,8 +186,6 @@
       <div id="empty" class="empty" hidden>Sin resultados para la búsqueda/filtrado actual.</div>
       <p class="foot">¿Querés aportar? <a href="https://cafecito.app/resumeneseco" target="_blank" rel="noopener">Invitarnos un cafecito</a> o compartí la web con tus compas.</p>
     </section>
-
-   
   </main>
 
   <script>
@@ -211,20 +226,18 @@
     function normalize(s){ return (s||"").toString().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,""); }
 
     function cardHTML(item){
+      const disponible = item.estado === "disponible" && item.link && item.link !== "#";
       const badge = item.estado === "proximamente"
         ? '<span class="badge gray">Próximamente</span>'
         : '<span class="badge">Disponible</span>';
-      const linkDrive = (item.estado === "disponible")
-        ? (item.link && item.link !== "#" ? item.link : "#")
-        : "";
       const linkBtn = item.estado === "disponible"
-        ? `<a class="a primary" href="${linkDrive}" target="_blank" rel="noopener">Ver en Drive</a>`
+        ? `<a class="a primary" href="${item.link || '#'}" target="_blank" rel="noopener">Ver en Drive</a>`
         : `<span class="a" style="pointer-events:none;opacity:.6">En preparación</span>`;
       return `
         <article class="card">
           <div class="meta">${badge} <span class="pill">${item.anio}</span></div>
           <h3>${item.materia}</h3>
-          <p class="desc">${item.nota ? item.nota : 'Apunte actualizado y listo para estudiar.'}</p>
+          ${item.nota ? `<p class="desc">${item.nota}</p>` : `<p class="desc">Apunte actualizado y listo para estudiar.</p>`}
           <div class="actions">
             ${linkBtn}
             <a class="a" href="https://cafecito.app/resumeneseco" target="_blank" rel="noopener">Invitar ☕</a>
@@ -239,7 +252,8 @@
 
       // Agrupar por año en orden
       const ordenAnios = ["1° año","2° año","3° año","4° año","5° año"];
-      const grupos = {}; ordenAnios.forEach(a=>grupos[a]=[]);
+      const grupos = {};
+      ordenAnios.forEach(a=>grupos[a]=[]);
       list.forEach(it => { (grupos[it.anio] ||= []).push(it); });
 
       const frag = [];
@@ -264,12 +278,9 @@
       render(res);
     }
 
-  
-
     q.addEventListener('input', applyFilters);
     filtroAnio.addEventListener('change', applyFilters);
     render(RESUMENES);
   </script>
 </body>
 </html>
-
